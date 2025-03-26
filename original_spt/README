@@ -35,3 +35,5 @@ closeTreadmill.m: Function that closes treadmill connection and unloads .dll lib
 % FILES FROM SENIOR DESIGN TEAM WITH MODIFICATIONS FOR IMPLEMENTATION %  
 %=====================================================================%  
 controller.m: Run to execute self-pacing treadmill control (ControlDesk must be streaming Simulink model outputs to stream002.mat file)
+data_parse4.m: Embedded function of Simulink model that contains self-pacing control logic
+safety.m: Embedded function of Simulink model that contains self-pacing control logic
