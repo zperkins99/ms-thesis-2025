@@ -1,14 +1,37 @@
-MATLAB FILES ARE COMPATIBLE WITH MATLAB 2009a  
-CODE WAS WRITTEN BY THE HAL SENIOR DESIGN TEAM (SPRING 2017) AND MODIFIED FOR IMPLEMENTATION IN FALL 2024 / SPRING 2025  
+MATLAB FILES ARE COMPATIBLE WITH MATLAB/Simulink 2009a  
+CODE WAS WRITTEN BY THE HAL SENIOR DESIGN TEAM (SPRING 2017) AND MODIFIED FOR IMPLEMENTATION IN FALL 2024 / SPRING 2025 FOR THESIS  
 
 %=============================================================================%  
 % FILES ASSOCIATED WITH DS1103 REAL-TIME CONTROL SYSTEM / DSPACE CONTROLDESK  %  
 %=============================================================================%  
+To get stream002 (used in controller.m) dSPACE CONTROLDESK is leveraged using the following files:  
 
-%=======================================% 
-% FILES ASSOCIATE WITH TREADMILL REMOTE %  
-%=======================================% 
+ControlDesk Experiment Files:  
+sd_control2.cdc  
+sd_control2.cdd  
+sd_control2.cdx  
+
+Real-Time Simulink Compiled Model Files:  
+SD_jf_median_control2.map  
+SD_jf_median_control2.mdl: Model file that can be opened with MATLAB/Simulink  
+SD_jf_median_control2.ppc  
+SD_jf_median_control2.sdf  
+SD_jf_median_control2.trc  
+
+ControlDesk Layout File:  
+median_zp.lay: Newly created layout file with logged data output incorporated into controller.m code for implementation  
+
+%========================================%  
+% FILES ASSOCIATED WITH TREADMILL REMOTE %  
+%========================================%  
+treadmill_remote.dll: Dynamic link library created from source files from treadmill manufacturer   
+treadmill_remote.h: Header file  
+loadTreadmillLibrary.m: Function to load dynamic link library for use in self-pacing control   
+initialize.m: Function that creates treadmill connection (treadmill control panel must be set to be ready for remote connection)  
+setSpeed.m: Function to set the speed and acceleration of the treadmill  
+closeTreadmill.m: Function that closes treadmill connection and unloads .dll library  
 
 %=====================================================================%  
 % FILES FROM SENIOR DESIGN TEAM WITH MODIFICATIONS FOR IMPLEMENTATION %  
 %=====================================================================%  
+controller.m: Run to execute self-pacing treadmill control  
