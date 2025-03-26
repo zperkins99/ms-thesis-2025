@@ -1,0 +1,2016 @@
+-- ****************************************************************************
+--
+--  Trace file: SD_jf_median_control2.trc
+--
+--  RTI1103 6.4 (03-Dec-2009)
+--  Wed Apr 12 15:27:04 2017
+--
+--  Used options:
+--    TRCGenerateVirtualBlocks      = 1
+--    TRCGenerateLabels             = 1
+--    TRCMaskParameters             = 0
+--    TRCGenerateStates             = 0
+--    TRCGenerateDerivatives        = 0
+--    TRCGenerateParamValues        = 0
+--    TRCGenerateApplicationKeyword = 0
+--    EnableRTWCodeReuse            = 1
+--    TRCOnlyGlobals                = 0
+--
+--  Trace file format: 2
+--
+--  (c) Copyright 2008, dSPACE GmbH. All rights reserved.
+--
+-- ****************************************************************************
+
+-- ******** Keywords **********************************************************
+
+-- _application "SD_jf_median_control2.map"
+
+_genname     "RTI"
+_genversion  "6.4"
+_gendate     "04/12/2017 15:27:09"
+_description ""
+_author      "RTI1103 6.4 (03-Dec-2009)"
+_model       "SD_jf_median_control2.mdl"
+
+-- Default data type formats
+_floating_point_type(64,IEEE)
+_integer_type(32)
+
+-- No Data Capture blocks within model: use base sample time as sampling period
+sampling_period[0]
+{
+  value:       0.001
+  alias:       "HostService"
+  increment:   0.001
+  unit:        "s"
+}
+
+
+-- Type definitions for arrays
+typedef SD_jf_median_control2_ArrayDT0_3 flt(64,IEEE)[3]
+typedef SD_jf_median_control2_ArrayDT0_8 flt(64,IEEE)[8]
+typedef SD_jf_median_control2_ArrayDT0_3_4_Col col flt(64,IEEE)[3][4]
+typedef SD_jf_median_control2_ArrayDT0_2_4_Col col flt(64,IEEE)[2][4]
+
+
+-- ******** Simulation control variables **************************************
+
+finalTime
+{
+ type:  flt(64,IEEE)*
+ alias: "finalTime"
+ desc:  "Simulation stop time. When reached, simState switches to STOP."
+ flags:  SYSTEM|READONLY
+ unit:  "s"
+}
+
+currentTime
+{
+ type:  flt(64,IEEE)*
+ alias: "currentTime"
+ desc:  "Current simulation time. Increments with execution of Timer Task 1."
+ flags: SYSTEM|READONLY
+ unit:  "s"
+}
+
+modelStepSize
+{
+ type:  flt(64,IEEE)
+ alias: "modelStepSize"
+ desc:  "Fixed step size of the model, sample time of Timer Task 1."
+ flags: SYSTEM|READONLY
+ unit:  "s"
+}
+
+simState
+{
+ type:  int(32)
+ alias: "simState"
+ desc:  "Simulation state: STOP=0 PAUSE=1 RUN=2"
+ flags: SYSTEM
+ unit:  "-"
+}
+
+msg_last_error_no
+{
+ type:  uint(32)
+ alias: "errorNumber"
+ desc:  "Error number of last error message (zero if no error)."
+ unit:  "-"
+ flags: SYSTEM|READONLY
+}
+
+rtiAssertionMode
+{
+ type:  int(32)
+ alias: "rtiAssertionMode"
+ desc:  "Assertion Mode: OFF=0 WARN=1 STOP=2"
+ flags: SYSTEM
+ unit:  "-"
+}
+
+
+-- ******** Model variables ***************************************************
+
+group "Model Root"
+{
+ flags: COLLAPSED
+}
+	group "Embedded\nMATLAB Function" -- block-group
+	{
+	 block: "Stateflow"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[38]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "BackCoP"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_B_real_T_0[39]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Hip"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_B_real_T_0[40]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "run_med"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_B_real_T_0[41]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "new_s"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_B_real_T_0[42]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "mp"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+
+
+	endgroup -- block-group "Embedded\nMATLAB Function"
+
+	group "Embedded\nMATLAB Function1" -- block-group
+	{
+	 block: "Stateflow"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[28]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Vcomm"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_B_real_T_0[29]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "STOP"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+
+
+	endgroup -- block-group "Embedded\nMATLAB Function1"
+
+	group "Clock" -- block-group
+	{
+	 block: "Clock"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[20]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+	endgroup -- block-group "Clock"
+
+	group "Constant" -- block-group
+	{
+	 block: "Constant"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		-- Skipping output Out1
+		p_SD_jf_median_control2_P_real_T_0[128]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Value"
+		 flags:   PARAM
+		}
+
+
+	endgroup -- block-group "Constant"
+
+	group "Data Type Conversion" -- block-group
+	{
+	 block: "DataTypeConversion"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[5]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+	endgroup -- block-group "Data Type Conversion"
+
+	group "Data Type Conversion1" -- block-group
+	{
+	 block: "DataTypeConversion"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[15]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+	endgroup -- block-group "Data Type Conversion1"
+
+	group "Demux" -- block-group
+	{
+	 block: "Demux"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[0]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_B_real_T_0[1]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out2"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_B_real_T_0[2]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out3"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+	endgroup -- block-group "Demux"
+
+	group "Demux1" -- block-group
+	{
+	 block: "Demux"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[10]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_B_real_T_0[11]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out2"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_B_real_T_0[12]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out3"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+	endgroup -- block-group "Demux1"
+
+	group "CH10 Raw" -- block-group
+	{
+	 block: "Gain"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[18]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_P_real_T_0[107]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Gain"
+		 flags:   PARAM
+		}
+
+
+	endgroup -- block-group "CH10 Raw"
+
+	group "CH11 Raw" -- block-group
+	{
+	 block: "Gain"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[13]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_P_real_T_0[64]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Gain"
+		 flags:   PARAM
+		}
+
+
+	endgroup -- block-group "CH11 Raw"
+
+	group "CH13 Raw" -- block-group
+	{
+	 block: "Gain"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[6]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_P_real_T_0[22]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Gain"
+		 flags:   PARAM
+		}
+
+
+	endgroup -- block-group "CH13 Raw"
+
+	group "CH14 Raw" -- block-group
+	{
+	 block: "Gain"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[8]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_P_real_T_0[43]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Gain"
+		 flags:   PARAM
+		}
+
+
+	endgroup -- block-group "CH14 Raw"
+
+	group "CH15 Raw" -- block-group
+	{
+	 block: "Gain"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[3]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_P_real_T_0[0]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Gain"
+		 flags:   PARAM
+		}
+
+
+	endgroup -- block-group "CH15 Raw"
+
+	group "CH9 Raw" -- block-group
+	{
+	 block: "Gain"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[16]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_P_real_T_0[86]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Gain"
+		 flags:   PARAM
+		}
+
+
+	endgroup -- block-group "CH9 Raw"
+
+	group "Mux" -- block-group
+	{
+	 block: "Mux"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[5]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1{SubArray1}"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_B_real_T_0[7]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1{SubArray2}"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_B_real_T_0[9]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1{SubArray3}"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_B_real_T_0[4]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1{SubArray4}"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_B_real_T_0[15]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1{SubArray5}"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_B_real_T_0[17]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1{SubArray6}"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_B_real_T_0[19]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1{SubArray7}"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+		p_SD_jf_median_control2_B_real_T_0[14]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1{SubArray8}"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+	endgroup -- block-group "Mux"
+
+	group "Subtract" -- block-group
+	{
+	 block: "Sum"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[21]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+	endgroup -- block-group "Subtract"
+
+	group "BackCoP" -- block-group
+	{
+	 block: "ToWorkspace"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[38]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "In1"
+		 desc:    ""
+		 flags:   SINK|READONLY
+		}
+
+
+
+	endgroup -- block-group "BackCoP"
+
+	group "Hip" -- block-group
+	{
+	 block: "ToWorkspace"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[39]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "In1"
+		 desc:    ""
+		 flags:   SINK|READONLY
+		}
+
+
+
+	endgroup -- block-group "Hip"
+
+	group "LON" -- block-group
+	{
+	 block: "ToWorkspace"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_uint8_T_1[0]
+		{
+		 type:    uint(8)*
+		 alias:   "In1"
+		 desc:    ""
+		 flags:   SINK|READONLY
+		}
+
+
+
+	endgroup -- block-group "LON"
+
+	group "Left Fy" -- block-group
+	{
+	 block: "ToWorkspace"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[9]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "In1"
+		 desc:    ""
+		 flags:   SINK|READONLY
+		}
+
+
+
+	endgroup -- block-group "Left Fy"
+
+	group "Left Fz" -- block-group
+	{
+	 block: "ToWorkspace"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[4]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "In1"
+		 desc:    ""
+		 flags:   SINK|READONLY
+		}
+
+
+
+	endgroup -- block-group "Left Fz"
+
+	group "Left Mx" -- block-group
+	{
+	 block: "ToWorkspace"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[7]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "In1"
+		 desc:    ""
+		 flags:   SINK|READONLY
+		}
+
+
+
+	endgroup -- block-group "Left Mx"
+
+	group "RON" -- block-group
+	{
+	 block: "ToWorkspace"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_uint8_T_1[1]
+		{
+		 type:    uint(8)*
+		 alias:   "In1"
+		 desc:    ""
+		 flags:   SINK|READONLY
+		}
+
+
+
+	endgroup -- block-group "RON"
+
+	group "Right Fy" -- block-group
+	{
+	 block: "ToWorkspace"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[19]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "In1"
+		 desc:    ""
+		 flags:   SINK|READONLY
+		}
+
+
+
+	endgroup -- block-group "Right Fy"
+
+	group "Right Fz" -- block-group
+	{
+	 block: "ToWorkspace"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[14]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "In1"
+		 desc:    ""
+		 flags:   SINK|READONLY
+		}
+
+
+
+	endgroup -- block-group "Right Fz"
+
+	group "Right Mx" -- block-group
+	{
+	 block: "ToWorkspace"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[17]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "In1"
+		 desc:    ""
+		 flags:   SINK|READONLY
+		}
+
+
+
+	endgroup -- block-group "Right Mx"
+
+	group "STOP1" -- block-group
+	{
+	 block: "ToWorkspace"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[29]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "In1"
+		 desc:    ""
+		 flags:   SINK|READONLY
+		}
+
+
+
+	endgroup -- block-group "STOP1"
+
+	group "Vcomm1" -- block-group
+	{
+	 block: "ToWorkspace"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[28]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "In1"
+		 desc:    ""
+		 flags:   SINK|READONLY
+		}
+
+
+
+	endgroup -- block-group "Vcomm1"
+
+	group "mp" -- block-group
+	{
+	 block: "ToWorkspace"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[42]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "In1"
+		 desc:    ""
+		 flags:   SINK|READONLY
+		}
+
+
+
+	endgroup -- block-group "mp"
+
+	group "new_stride" -- block-group
+	{
+	 block: "ToWorkspace"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[41]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "In1"
+		 desc:    ""
+		 flags:   SINK|READONLY
+		}
+
+
+
+	endgroup -- block-group "new_stride"
+
+	group "run_med" -- block-group
+	{
+	 block: "ToWorkspace"
+	 desc:  ""
+	 flags: BLOCK|COLLAPSED
+	}
+		p_SD_jf_median_control2_B_real_T_0[40]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "In1"
+		 desc:    ""
+		 flags:   SINK|READONLY
+		}
+
+
+
+	endgroup -- block-group "run_med"
+
+  
+  
+	group "25 Hz Low Pass" -- subsystem-group
+	{
+	 flags: COLLAPSED
+	 desc:  ""
+	}
+
+		p_SD_jf_median_control2_B_real_T_0[7]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+		group "In1" -- block-group
+		{
+		 block: "Inport"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[6]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+		endgroup -- block-group "In1"
+
+		group "Digital Filter" -- block-group
+		{
+		 block: "S-Function"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[7]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+			p_SD_jf_median_control2_P_real_T_0[23]
+			{
+			 type:    SD_jf_median_control2_ArrayDT0_3_4_Col*
+			 alias:   "RTP1COEFF"
+			 flags:   PARAM
+			}
+			p_SD_jf_median_control2_P_real_T_0[35]
+			{
+			 type:    SD_jf_median_control2_ArrayDT0_2_4_Col*
+			 alias:   "RTP2COEFF"
+			 flags:   PARAM
+			}
+
+
+		endgroup -- block-group "Digital Filter"
+
+  
+  
+		group "Check Signal\nAttributes" -- subsystem-group
+		{
+		 flags: COLLAPSED
+		 desc:  ""
+		}
+
+			p_SD_jf_median_control2_B_real_T_0[6]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+			group "In1" -- block-group
+			{
+			 block: "Inport"
+			 desc:  ""
+			 flags: BLOCK|COLLAPSED
+			}
+				p_SD_jf_median_control2_B_real_T_0[6]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Out1"
+				 desc:    ""
+				 flags:   OUTPUT|READONLY
+				}
+
+
+			endgroup -- block-group "In1"
+
+			group "Check Signal\nAttributes" -- block-group
+			{
+			 block: "S-Function"
+			 desc:  ""
+			 flags: BLOCK|COLLAPSED
+			}
+				p_SD_jf_median_control2_B_real_T_0[6]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "In1"
+				 desc:    ""
+				 flags:   SINK|READONLY
+				}
+
+
+
+			endgroup -- block-group "Check Signal\nAttributes"
+
+
+
+		endgroup -- subsystem-group "Check Signal\nAttributes"
+
+
+	endgroup -- subsystem-group "25 Hz Low Pass"
+  
+  
+	group "25 Hz Low Pass1" -- subsystem-group
+	{
+	 flags: COLLAPSED
+	 desc:  ""
+	}
+
+		p_SD_jf_median_control2_B_real_T_0[9]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+		group "In1" -- block-group
+		{
+		 block: "Inport"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[8]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+		endgroup -- block-group "In1"
+
+		group "Digital Filter" -- block-group
+		{
+		 block: "S-Function"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[9]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+			p_SD_jf_median_control2_P_real_T_0[44]
+			{
+			 type:    SD_jf_median_control2_ArrayDT0_3_4_Col*
+			 alias:   "RTP1COEFF"
+			 flags:   PARAM
+			}
+			p_SD_jf_median_control2_P_real_T_0[56]
+			{
+			 type:    SD_jf_median_control2_ArrayDT0_2_4_Col*
+			 alias:   "RTP2COEFF"
+			 flags:   PARAM
+			}
+
+
+		endgroup -- block-group "Digital Filter"
+
+  
+  
+		group "Check Signal\nAttributes" -- subsystem-group
+		{
+		 flags: COLLAPSED
+		 desc:  ""
+		}
+
+			p_SD_jf_median_control2_B_real_T_0[8]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+			group "In1" -- block-group
+			{
+			 block: "Inport"
+			 desc:  ""
+			 flags: BLOCK|COLLAPSED
+			}
+				p_SD_jf_median_control2_B_real_T_0[8]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Out1"
+				 desc:    ""
+				 flags:   OUTPUT|READONLY
+				}
+
+
+			endgroup -- block-group "In1"
+
+			group "Check Signal\nAttributes" -- block-group
+			{
+			 block: "S-Function"
+			 desc:  ""
+			 flags: BLOCK|COLLAPSED
+			}
+				p_SD_jf_median_control2_B_real_T_0[8]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "In1"
+				 desc:    ""
+				 flags:   SINK|READONLY
+				}
+
+
+
+			endgroup -- block-group "Check Signal\nAttributes"
+
+
+
+		endgroup -- subsystem-group "Check Signal\nAttributes"
+
+
+	endgroup -- subsystem-group "25 Hz Low Pass1"
+  
+  
+	group "25 Hz Low Pass2" -- subsystem-group
+	{
+	 flags: COLLAPSED
+	 desc:  ""
+	}
+
+		p_SD_jf_median_control2_B_real_T_0[4]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+		group "In1" -- block-group
+		{
+		 block: "Inport"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[3]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+		endgroup -- block-group "In1"
+
+		group "Digital Filter" -- block-group
+		{
+		 block: "S-Function"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[4]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+			p_SD_jf_median_control2_P_real_T_0[1]
+			{
+			 type:    SD_jf_median_control2_ArrayDT0_3_4_Col*
+			 alias:   "RTP1COEFF"
+			 flags:   PARAM
+			}
+			p_SD_jf_median_control2_P_real_T_0[13]
+			{
+			 type:    SD_jf_median_control2_ArrayDT0_2_4_Col*
+			 alias:   "RTP2COEFF"
+			 flags:   PARAM
+			}
+
+
+		endgroup -- block-group "Digital Filter"
+
+  
+  
+		group "Check Signal\nAttributes" -- subsystem-group
+		{
+		 flags: COLLAPSED
+		 desc:  ""
+		}
+
+			p_SD_jf_median_control2_B_real_T_0[3]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+			group "In1" -- block-group
+			{
+			 block: "Inport"
+			 desc:  ""
+			 flags: BLOCK|COLLAPSED
+			}
+				p_SD_jf_median_control2_B_real_T_0[3]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Out1"
+				 desc:    ""
+				 flags:   OUTPUT|READONLY
+				}
+
+
+			endgroup -- block-group "In1"
+
+			group "Check Signal\nAttributes" -- block-group
+			{
+			 block: "S-Function"
+			 desc:  ""
+			 flags: BLOCK|COLLAPSED
+			}
+				p_SD_jf_median_control2_B_real_T_0[3]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "In1"
+				 desc:    ""
+				 flags:   SINK|READONLY
+				}
+
+
+
+			endgroup -- block-group "Check Signal\nAttributes"
+
+
+
+		endgroup -- subsystem-group "Check Signal\nAttributes"
+
+
+	endgroup -- subsystem-group "25 Hz Low Pass2"
+  
+  
+	group "25 Hz Low Pass3" -- subsystem-group
+	{
+	 flags: COLLAPSED
+	 desc:  ""
+	}
+
+		p_SD_jf_median_control2_B_real_T_0[17]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+		group "In1" -- block-group
+		{
+		 block: "Inport"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[16]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+		endgroup -- block-group "In1"
+
+		group "Digital Filter" -- block-group
+		{
+		 block: "S-Function"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[17]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+			p_SD_jf_median_control2_P_real_T_0[87]
+			{
+			 type:    SD_jf_median_control2_ArrayDT0_3_4_Col*
+			 alias:   "RTP1COEFF"
+			 flags:   PARAM
+			}
+			p_SD_jf_median_control2_P_real_T_0[99]
+			{
+			 type:    SD_jf_median_control2_ArrayDT0_2_4_Col*
+			 alias:   "RTP2COEFF"
+			 flags:   PARAM
+			}
+
+
+		endgroup -- block-group "Digital Filter"
+
+  
+  
+		group "Check Signal\nAttributes" -- subsystem-group
+		{
+		 flags: COLLAPSED
+		 desc:  ""
+		}
+
+			p_SD_jf_median_control2_B_real_T_0[16]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+			group "In1" -- block-group
+			{
+			 block: "Inport"
+			 desc:  ""
+			 flags: BLOCK|COLLAPSED
+			}
+				p_SD_jf_median_control2_B_real_T_0[16]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Out1"
+				 desc:    ""
+				 flags:   OUTPUT|READONLY
+				}
+
+
+			endgroup -- block-group "In1"
+
+			group "Check Signal\nAttributes" -- block-group
+			{
+			 block: "S-Function"
+			 desc:  ""
+			 flags: BLOCK|COLLAPSED
+			}
+				p_SD_jf_median_control2_B_real_T_0[16]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "In1"
+				 desc:    ""
+				 flags:   SINK|READONLY
+				}
+
+
+
+			endgroup -- block-group "Check Signal\nAttributes"
+
+
+
+		endgroup -- subsystem-group "Check Signal\nAttributes"
+
+
+	endgroup -- subsystem-group "25 Hz Low Pass3"
+  
+  
+	group "25 Hz Low Pass4" -- subsystem-group
+	{
+	 flags: COLLAPSED
+	 desc:  ""
+	}
+
+		p_SD_jf_median_control2_B_real_T_0[19]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+		group "In1" -- block-group
+		{
+		 block: "Inport"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[18]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+		endgroup -- block-group "In1"
+
+		group "Digital Filter" -- block-group
+		{
+		 block: "S-Function"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[19]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+			p_SD_jf_median_control2_P_real_T_0[108]
+			{
+			 type:    SD_jf_median_control2_ArrayDT0_3_4_Col*
+			 alias:   "RTP1COEFF"
+			 flags:   PARAM
+			}
+			p_SD_jf_median_control2_P_real_T_0[120]
+			{
+			 type:    SD_jf_median_control2_ArrayDT0_2_4_Col*
+			 alias:   "RTP2COEFF"
+			 flags:   PARAM
+			}
+
+
+		endgroup -- block-group "Digital Filter"
+
+  
+  
+		group "Check Signal\nAttributes" -- subsystem-group
+		{
+		 flags: COLLAPSED
+		 desc:  ""
+		}
+
+			p_SD_jf_median_control2_B_real_T_0[18]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+			group "In1" -- block-group
+			{
+			 block: "Inport"
+			 desc:  ""
+			 flags: BLOCK|COLLAPSED
+			}
+				p_SD_jf_median_control2_B_real_T_0[18]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Out1"
+				 desc:    ""
+				 flags:   OUTPUT|READONLY
+				}
+
+
+			endgroup -- block-group "In1"
+
+			group "Check Signal\nAttributes" -- block-group
+			{
+			 block: "S-Function"
+			 desc:  ""
+			 flags: BLOCK|COLLAPSED
+			}
+				p_SD_jf_median_control2_B_real_T_0[18]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "In1"
+				 desc:    ""
+				 flags:   SINK|READONLY
+				}
+
+
+
+			endgroup -- block-group "Check Signal\nAttributes"
+
+
+
+		endgroup -- subsystem-group "Check Signal\nAttributes"
+
+
+	endgroup -- subsystem-group "25 Hz Low Pass4"
+  
+  
+	group "25 Hz Low Pass5" -- subsystem-group
+	{
+	 flags: COLLAPSED
+	 desc:  ""
+	}
+
+		p_SD_jf_median_control2_B_real_T_0[14]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "Out1"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+		group "In1" -- block-group
+		{
+		 block: "Inport"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[13]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+		endgroup -- block-group "In1"
+
+		group "Digital Filter" -- block-group
+		{
+		 block: "S-Function"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[14]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+			p_SD_jf_median_control2_P_real_T_0[65]
+			{
+			 type:    SD_jf_median_control2_ArrayDT0_3_4_Col*
+			 alias:   "RTP1COEFF"
+			 flags:   PARAM
+			}
+			p_SD_jf_median_control2_P_real_T_0[77]
+			{
+			 type:    SD_jf_median_control2_ArrayDT0_2_4_Col*
+			 alias:   "RTP2COEFF"
+			 flags:   PARAM
+			}
+
+
+		endgroup -- block-group "Digital Filter"
+
+  
+  
+		group "Check Signal\nAttributes" -- subsystem-group
+		{
+		 flags: COLLAPSED
+		 desc:  ""
+		}
+
+			p_SD_jf_median_control2_B_real_T_0[13]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+			group "In1" -- block-group
+			{
+			 block: "Inport"
+			 desc:  ""
+			 flags: BLOCK|COLLAPSED
+			}
+				p_SD_jf_median_control2_B_real_T_0[13]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "Out1"
+				 desc:    ""
+				 flags:   OUTPUT|READONLY
+				}
+
+
+			endgroup -- block-group "In1"
+
+			group "Check Signal\nAttributes" -- block-group
+			{
+			 block: "S-Function"
+			 desc:  ""
+			 flags: BLOCK|COLLAPSED
+			}
+				p_SD_jf_median_control2_B_real_T_0[13]
+				{
+				 type:    flt(64,IEEE)*
+				 alias:   "In1"
+				 desc:    ""
+				 flags:   SINK|READONLY
+				}
+
+
+
+			endgroup -- block-group "Check Signal\nAttributes"
+
+
+
+		endgroup -- subsystem-group "Check Signal\nAttributes"
+
+
+	endgroup -- subsystem-group "25 Hz Low Pass5"
+  
+  
+	group "DS1103MUX_ADC_CON3" -- subsystem-group
+	{
+	 flags: COLLAPSED
+	 desc:  ""
+	}
+
+		p_SD_jf_median_control2_B_real_T_0[10]
+		{
+		 type:    SD_jf_median_control2_ArrayDT0_3*
+		 alias:   "ADC"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+	endgroup -- subsystem-group "DS1103MUX_ADC_CON3"
+  
+  
+	group "DS1103MUX_ADC_CON4" -- subsystem-group
+	{
+	 flags: COLLAPSED
+	 desc:  ""
+	}
+
+		p_SD_jf_median_control2_B_real_T_0[0]
+		{
+		 type:    SD_jf_median_control2_ArrayDT0_3*
+		 alias:   "ADC"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+	endgroup -- subsystem-group "DS1103MUX_ADC_CON4"
+  
+  
+	group "Is Left ON?" -- subsystem-group
+	{
+	 flags: COLLAPSED
+	 desc:  ""
+	}
+
+		p_SD_jf_median_control2_B_uint8_T_1[0]
+		{
+		 type:    uint(8)*
+		 alias:   "y"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+		group "u" -- block-group
+		{
+		 block: "Inport"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[4]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+		endgroup -- block-group "u"
+
+		group "Constant" -- block-group
+		{
+		 block: "Constant"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			-- Skipping output Out1
+			p_SD_jf_median_control2_P_real_T_0[21]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Value"
+			 flags:   PARAM
+			}
+
+
+		endgroup -- block-group "Constant"
+
+		group "Compare" -- block-group
+		{
+		 block: "RelationalOperator"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_uint8_T_1[0]
+			{
+			 type:    uint(8)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+		endgroup -- block-group "Compare"
+
+
+
+	endgroup -- subsystem-group "Is Left ON?"
+  
+  
+	group "Is Right ON?" -- subsystem-group
+	{
+	 flags: COLLAPSED
+	 desc:  ""
+	}
+
+		p_SD_jf_median_control2_B_uint8_T_1[1]
+		{
+		 type:    uint(8)*
+		 alias:   "y"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+		group "u" -- block-group
+		{
+		 block: "Inport"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[14]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+		endgroup -- block-group "u"
+
+		group "Constant" -- block-group
+		{
+		 block: "Constant"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			-- Skipping output Out1
+			p_SD_jf_median_control2_P_real_T_0[85]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Value"
+			 flags:   PARAM
+			}
+
+
+		endgroup -- block-group "Constant"
+
+		group "Compare" -- block-group
+		{
+		 block: "RelationalOperator"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_uint8_T_1[1]
+			{
+			 type:    uint(8)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+		endgroup -- block-group "Compare"
+
+
+
+	endgroup -- subsystem-group "Is Right ON?"
+  
+  
+	group "PID Controller" -- subsystem-group
+	{
+	 flags: COLLAPSED
+	 desc:  ""
+	}
+
+		p_SD_jf_median_control2_B_real_T_0[26]
+		{
+		 type:    flt(64,IEEE)*
+		 alias:   "u"
+		 desc:    ""
+		 flags:   OUTPUT|READONLY
+		}
+
+
+		group "e" -- block-group
+		{
+		 block: "Inport"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[21]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+		endgroup -- block-group "e"
+
+		group "Ideal\nDerivative" -- block-group
+		{
+		 block: "Derivative"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[25]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+		endgroup -- block-group "Ideal\nDerivative"
+
+		group "Derivative\nGain" -- block-group
+		{
+		 block: "Gain"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[24]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+			p_SD_jf_median_control2_P_real_T_0[131]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Gain"
+			 flags:   PARAM
+			}
+
+
+		endgroup -- block-group "Derivative\nGain"
+
+		group "Integral\nGain" -- block-group
+		{
+		 block: "Gain"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[27]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+			p_SD_jf_median_control2_P_real_T_0[132]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Gain"
+			 flags:   PARAM
+			}
+
+
+		endgroup -- block-group "Integral\nGain"
+
+		group "Proportional\nGain" -- block-group
+		{
+		 block: "Gain"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[22]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+			p_SD_jf_median_control2_P_real_T_0[129]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Gain"
+			 flags:   PARAM
+			}
+
+
+		endgroup -- block-group "Proportional\nGain"
+
+		group "Integrator" -- block-group
+		{
+		 block: "Integrator"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[23]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+			p_SD_jf_median_control2_P_real_T_0[130]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "InitialCondition"
+			 flags:   PARAM
+			}
+
+
+		endgroup -- block-group "Integrator"
+
+		group "Sum" -- block-group
+		{
+		 block: "Sum"
+		 desc:  ""
+		 flags: BLOCK|COLLAPSED
+		}
+			p_SD_jf_median_control2_B_real_T_0[26]
+			{
+			 type:    flt(64,IEEE)*
+			 alias:   "Out1"
+			 desc:    ""
+			 flags:   OUTPUT|READONLY
+			}
+
+
+		endgroup -- block-group "Sum"
+
+
+
+	endgroup -- subsystem-group "PID Controller"
+  
+  
+	group "RTI Data" -- subsystem-group
+	{
+	 flags: COLLAPSED
+	 desc:  ""
+	}
+
+
+	endgroup -- subsystem-group "RTI Data"
+
+
+
+
+endgroup -- "Model Root"
+-- ******** Model Root Parameters from model_mrp.trc **************************
+-- Model Root Parameters file is only generated if option TRCMaskParameters is enabled
+
+-- ******** Tunable Parameters ************************************************
+
+-- InlineParameters is off: no separate group for Tunable Parameters
+
+
+-- ******** State Machine Data ************************************************
+
+group "State Machine Data"
+{
+ flags: COLLAPSED
+}
+
+endgroup
+
+
+-- ******** Data Store Memories ***********************************************
+
+-- No Data Store Memories within the model.
+
+
+-- ******** Labels ************************************************************
+
+group "Labels"
+{
+ flags: COLLAPSED
+}
+
+endgroup
+
+-- ******** RTT Dynamic Variables *********************************************
+
+-- Generation of RTT Dynamic Variables turned off with EnableRealTimeTesting option.
+
+-- ******** User variables from model_usr.trc *********************************
+
+-- RTI_USR_TRC_BEGIN
+
+-- No user file SD_jf_median_control2_usr.trc found.
+
+-- RTI_USR_TRC_END
+
+-- ******** Task Information variables ****************************************
+
+group "Task Info"
+{
+ flags: COLLAPSED
+}
+  group "Timer Task 1"
+  {
+   flags: COLLAPSED
+  }
+
+  pRti_TIMERA_STime
+  {
+   type:  flt(64,IEEE)*
+   alias: "sampleTime"
+   flags: SYSTEM|READONLY
+  }
+  pRti_TIMERA_TTime
+  {
+   type:  flt(64,IEEE)*
+   alias: "turnaroundTime"
+   flags: SYSTEM|READONLY
+  }
+  pRti_TIMERA_TState
+  {
+   type:  int(32)*
+   alias: "state"
+   flags: SYSTEM|READONLY
+  }
+  pRti_TIMERA_OType
+  {
+   type:  int(32)*
+   alias: "overrunCheckType"
+   flags: SYSTEM|READONLY
+  }
+  pRti_TIMERA_OMax
+  {
+   type:  int(32)*
+   alias: "overrunQueueMax"
+   flags: SYSTEM|READONLY
+  }
+  pRti_TIMERA_ORpt
+  {
+   type:  int(32)*
+   alias: "overrunQueueCount"
+   flags: SYSTEM|READONLY
+  }
+  pRti_TIMERA_OCnt
+  {
+   type:  int(32)*
+   alias: "overrunCount"
+   flags: SYSTEM|READONLY
+  }
+  pRti_TIMERA_TCnt
+  {
+   type:  flt(64,IEEE)*
+   alias: "taskCallCount"
+   flags: SYSTEM|READONLY
+  }
+  pRti_TIMERA_Prio
+  {
+   type:  int(32)*
+   alias: "priority"
+   flags: SYSTEM|READONLY
+  }
+  endgroup
+
+endgroup
+
+-- ******** [EOF] *************************************************************
+
+
+
