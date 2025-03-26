@@ -4,7 +4,7 @@ CODE WAS WRITTEN BY THE HAL SENIOR DESIGN TEAM (SPRING 2017) AND MODIFIED FOR IM
 %=============================================================================%  
 % FILES ASSOCIATED WITH DS1103 REAL-TIME CONTROL SYSTEM / DSPACE CONTROLDESK  %  
 %=============================================================================%  
-To get stream002 (used in controller.m) dSPACE CONTROLDESK is leveraged using the following files:  
+To get stream002.mat (used in controller.m) dSPACE CONTROLDESK is leveraged using the following files:  
 
 ControlDesk Experiment Files:  
 sd_control2.cdc  
@@ -24,7 +24,7 @@ median_zp.lay: Newly created layout file with logged data output incorporated in
 %========================================%  
 % FILES ASSOCIATED WITH TREADMILL REMOTE %  
 %========================================%  
-treadmill_remote.dll: Dynamic link library created from source files from treadmill manufacturer   
+treadmill_remote.dll: Dynamic link library created from source files from treadmill manufacturer (32-bit)   
 treadmill_remote.h: Header file  
 loadTreadmillLibrary.m: Function to load dynamic link library for use in self-pacing control   
 initialize.m: Function that creates treadmill connection (treadmill control panel must be set to be ready for remote connection)  
@@ -34,4 +34,4 @@ closeTreadmill.m: Function that closes treadmill connection and unloads .dll lib
 %=====================================================================%  
 % FILES FROM SENIOR DESIGN TEAM WITH MODIFICATIONS FOR IMPLEMENTATION %  
 %=====================================================================%  
-controller.m: Run to execute self-pacing treadmill control  
+controller.m: Run to execute self-pacing treadmill control (ControlDesk must be streaming Simulink model outputs to stream002.mat file)
