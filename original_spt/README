@@ -28,7 +28,7 @@ stateEstimator.m: Function to estimate user position and velocity with Kalman fi
 calcTargetSpeed.m: Function to calculate updated treadmill speed based on control law and safety features  
 
 
-***** OTHER *****  
+***** OTHER FILES *****  
 controller.m: Run to execute self-pacing treadmill control  
 filterForcePlateData.m: Function for filtering force plate data pulled from Vicon DataStream  
 getUserMass.m: Function that uses pullForcePlateData.m to get user mass from force plate data  
