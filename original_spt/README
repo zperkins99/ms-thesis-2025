@@ -13,7 +13,7 @@ sd_control2.cdx
 
 Real-Time Simulink Compiled Model Files:  
 SD_jf_median_control2.map  
-SD_jf_median_control2.mdl: Model file that can be opened with MATLAB/Simulink  
+SD_jf_median_control2.mdl: Model file that can be opened with MATLAB/Simulink, contains embedded functions data_parse4 and safety with self-pacing control logic  
 SD_jf_median_control2.ppc  
 SD_jf_median_control2.sdf  
 SD_jf_median_control2.trc  
